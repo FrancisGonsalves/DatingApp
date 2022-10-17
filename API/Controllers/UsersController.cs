@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using API.Data;
 using API.Entities;
+using Microsoft.AspNetCore.Authorization;
 namespace API.Controllers
 {
     [ApiController]
@@ -22,6 +23,7 @@ namespace API.Controllers
             return await _context.Users.ToListAsync();
         }
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult<AppUser>> GetUser(int id)
         {
             return await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
